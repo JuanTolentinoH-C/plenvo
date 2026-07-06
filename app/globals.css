@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* ============================
+   Plenvo — Design Tokens
+   ============================ */
+:root {
+  /* Brand palette */
+  --plenvo-blue: #1e3a8a;       /* principal */
+  --plenvo-blue-2: #2563eb;     /* secundario */
+  --plenvo-green: #10b981;      /* éxito */
+  --plenvo-gray-900: #374151;   /* gris oscuro (texto) */
+  --plenvo-gray-500: #6b7280;   /* gris medio */
+  --plenvo-gray-300: #e5e7eb;   /* borde sutil */
+  --plenvo-gray-100: #f3f4f6;   /* gris claro (fondo secciones) */
+  --plenvo-gray-50:  #f9fafb;   /* fondo más sutil */
+
+  --background: #ffffff;
+  --foreground: var(--plenvo-gray-900); /* gris oscuro como texto base */
+
+  /* Gradiente de marca: azul → verde (como el isotipo) */
+  --plenvo-gradient: linear-gradient(
+    135deg,
+    var(--plenvo-blue) 0%,
+    var(--plenvo-blue-2) 50%,
+    var(--plenvo-green) 100%
+  );
+  --plenvo-gradient-soft: linear-gradient(
+    135deg,
+    rgba(30,58,138,0.10) 0%,
+    rgba(37,99,235,0.10) 50%,
+    rgba(16,185,129,0.10) 100%
+  );
+  --plenvo-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--plenvo-blue) 0deg,
+    var(--plenvo-blue-2) 120deg,
+    var(--plenvo-green) 240deg,
+    var(--plenvo-blue) 360deg
+  );
+
+  /* Radius scale (16px base) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  /* Sombras suaves estilo SaaS */
+  --shadow-xs: 0 1px 2px rgba(17,24,39,0.04);
+  --shadow-sm: 0 1px 3px rgba(17,24,39,0.06), 0 1px 2px rgba(17,24,39,0.04);
+  --shadow-md: 0 4px 12px rgba(17,24,39,0.06), 0 2px 4px rgba(17,24,39,0.04);
+  --shadow-lg: 0 12px 32px rgba(17,24,39,0.08), 0 4px 12px rgba(17,24,39,0.04);
+  --shadow-xl: 0 24px 48px rgba(17,24,39,0.10), 0 8px 16px rgba(17,24,39,0.06);
+  --shadow-glow: 0 0 0 1px rgba(37,99,235,0.10), 0 8px 24px rgba(37,99,235,0.15);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-plenvo-blue: var(--plenvo-blue);
+  --color-plenvo-blue-2: var(--plenvo-blue-2);
+  --color-plenvo-green: var(--plenvo-green);
+  --color-plenvo-gray: var(--plenvo-gray-900);
+  --color-plenvo-gray-500: var(--plenvo-gray-500);
+  --color-plenvo-gray-300: var(--plenvo-gray-300);
+  --color-plenvo-gray-100: var(--plenvo-gray-100);
+  --color-plenvo-gray-50: var(--plenvo-gray-50);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================
+   Utilidades Plenvo
+   ============================ */
+@utility plenvo-gradient-bg {
+  background-image: var(--plenvo-gradient);
+}
+@utility plenvo-gradient-text {
+  background-image: var(--plenvo-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@utility plenvo-gradient-soft-bg {
+  background-image: var(--plenvo-gradient-soft);
+}
+
+/* Sombras como utilities */
+@utility shadow-plenvo-xs {
+  box-shadow: var(--shadow-xs);
+}
+@utility shadow-plenvo-sm {
+  box-shadow: var(--shadow-sm);
+}
+@utility shadow-plenvo-md {
+  box-shadow: var(--shadow-md);
+}
+@utility shadow-plenvo-lg {
+  box-shadow: var(--shadow-lg);
+}
+@utility shadow-plenvo-xl {
+  box-shadow: var(--shadow-xl);
+}
+@utility shadow-plenvo-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================
+   Animaciones & microinteracciones
+   ============================ */
+@keyframes plenvo-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes plenvo-blob {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(20px,-30px) scale(1.05); }
+  66%      { transform: translate(-10px,15px) scale(0.97); }
+}
+@keyframes plenvo-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+@keyframes plenvo-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@utility animate-fade-up {
+  animation: plenvo-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility animate-blob {
+  animation: plenvo-blob 14s ease-in-out infinite;
+}
+@utility animate-pulse-slow {
+  animation: plenvo-pulse 2.4s ease-in-out infinite;
+}
+
+/* Reveal on scroll — controlado por IntersectionObserver en cliente */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+              transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+@utility reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover lift suave para cards SaaS */
+@utility hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+@utility hover-lift-active {
+  transform: translateY(-2px);
+}
+
+/* Sticky nav con blur estilo Stripe/Linear */
+@utility nav-blur {
+  background-color: rgba(255,255,255,0.72);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(17,24,39,0.06);
+}
+
+/* Background grid sutil estilo técnico */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(17,24,39,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,24,39,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
